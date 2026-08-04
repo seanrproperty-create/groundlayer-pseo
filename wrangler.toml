@@ -1,0 +1,38 @@
+name = "groundlayer-pseo"
+main = "src/index.js"
+compatibility_date = "2026-08-04"
+
+# groundlayer.co.uk was PropertyAlert's previous brand name (renamed March
+# 2026) and, until 2026-08-04, wildcard-redirected every path to
+# propertyalert.uk for exactly that reason. Sean explicitly decided
+# (2026-08-04, in chat, not via any third-party suggestion) to retire that
+# redirect and hand the whole domain to this project instead — confirmed he
+# doesn't need old-brand bookmarks preserved since both sites are new.
+#
+# This route is scoped ONLY to zone_name = "groundlayer.co.uk", a completely
+# separate Cloudflare zone from propertyalert.uk. PropertyAlert itself isn't
+# even Worker-routed (served directly from the Hetzner origin), so nothing
+# here can reach it — do not add a route with zone_name = "propertyalert.uk"
+# to this file; that project (if ever needed) belongs in its own Worker, the
+# way AppleManLegal has its own wrangler.toml for its propertyalert.uk route.
+routes = [
+  { pattern = "groundlayer.co.uk/*", zone_name = "groundlayer.co.uk" },
+  # www is a separate hostname (CNAME within the same zone) — route patterns
+  # match on literal hostname, not DNS target, so it needs its own entry or
+  # it silently falls through to the old redirect (caught 2026-08-04: Sean
+  # hit www.groundlayer.co.uk and still saw the propertyalert.uk redirect).
+  { pattern = "www.groundlayer.co.uk/*", zone_name = "groundlayer.co.uk" }
+]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "groundlayer-pseo"
+database_id = "44322957-b3fc-421c-a58a-9d0698f821f4"
+
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "groundlayer-pseo-uploads"
+
+# Secrets (not in [vars] — set via `wrangler secret put <NAME>`, never committed):
+#   RESEND_API_KEY   — same Resend account used by AppleManLegal / PropertyAlert
+#   SESSION_SECRET   — random string, signs the dashboard session cookie (see src/access.js)
