@@ -242,7 +242,8 @@ function consentBanner() {
 </script>`;
 }
 
-function pageShell({ title, description, headExtra = '', bodyClass = '', children }) {
+function pageShell({ title, description, canonical = '', headExtra = '', bodyClass = '', children }) {
+  const canonicalTag = canonical ? `<link rel="canonical" href="${canonical}">\n` : '';
   return `<!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -251,7 +252,7 @@ ${gaHead()}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${escapeHtml(title)}</title>
 <meta name="description" content="${escapeHtml(description)}">
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+${canonicalTag}<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="shortcut icon" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -323,8 +324,8 @@ function siteFooter() {
 // "County" and "Town" are shown for orientation but not linked — there's no
 // dedicated page for either yet, and a breadcrumb link that just dumps you
 // back on the generic hub would be misleading. Only "Home" and the current
-// page are real links, matching what the BreadcrumbList JSON-LD below
-// actually asserts (no "item" URL for entries with no real page).
+// page are real links — the BreadcrumbList JSON-LD below omits county/town
+// entirely rather than including them without a URL (see comment there).
 function renderBreadcrumb({ county, town, nicheLabel }) {
   return `
 <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -365,14 +366,20 @@ export function renderLandingPage({ niche, town }) {
   };
 
   const pageUrl = `${SITE_URL}/${niche.slug}-${town.slug}/`;
+  // County/town have no dedicated page, so they're deliberately left out of
+  // the JSON-LD entirely rather than included with a missing "item" URL —
+  // GSC flagged the latter as a critical "Missing field 'item'" structured
+  // data error (2026-08-05), since Google's BreadcrumbList spec only
+  // tolerates an item-less entry as the *last* one (the current page), and
+  // position 4 here already had an item while 2-3 didn't. The visual
+  // breadcrumb (renderBreadcrumb, below) still shows county/town as
+  // unlinked text for orientation — only the schema changed.
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: town.county },
-      { '@type': 'ListItem', position: 3, name: town.name },
-      { '@type': 'ListItem', position: 4, name: niche.label, item: pageUrl },
+      { '@type': 'ListItem', position: 2, name: niche.label, item: pageUrl },
     ],
   };
 
@@ -440,7 +447,7 @@ ${renderBreadcrumb({ county: town.county, town: town.name, nicheLabel: niche.lab
 </main>
 ${siteFooter()}`;
 
-  return pageShell({ title: pageTitle, description, headExtra, children: body });
+  return pageShell({ title: pageTitle, description, canonical: pageUrl, headExtra, children: body });
 }
 
 export function renderThankYouPage() {
@@ -521,6 +528,7 @@ ${siteFooter()}
   return pageShell({
     title: `${SITE_NAME} — UK Structural Specialist Directory`,
     description: `Find vetted structural specialists for subsidence repair, commercial roofing, tree surgery, and basement waterproofing across ${TOWNS.length} UK towns.`,
+    canonical: `${SITE_URL}/`,
     headExtra,
     children: body,
   });
@@ -707,7 +715,7 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Privacy Polic
 <main class="wrap">
   <div class="card policy-body">
     <h2>Who we are</h2>
-    <p>${SITE_NAME} (groundlayer.co.uk) is operated by EIGHTFINITY LTD. For any privacy question, contact <a href="mailto:${ADMIN_EMAIL}">${ADMIN_EMAIL}</a> or call <a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a>.</p>
+    <p>${SITE_NAME} (groundlayer.co.uk) is operated by <a href="https://eightfinity.net/" target="_blank" rel="noopener">EIGHTFINITY LTD</a>, a company registered in England and Wales (company no. 15528515), registered office 20 Wenlock Road, London, England, N1 7GU. For any privacy question, contact <a href="mailto:${ADMIN_EMAIL}">${ADMIN_EMAIL}</a> or call <a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a>.</p>
 
     <h2>What we collect</h2>
     <p>When you submit an inspection request, we collect your name, phone number, email address, the details you describe, and an optional photo. We also use Google Analytics to understand how visitors use the site, and Google AdSense may set advertising cookies.</p>
@@ -730,7 +738,7 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Privacy Polic
 </main>
 ${siteFooter()}`;
 
-  return pageShell({ title: pageTitle, description, bodyClass: '', children: body });
+  return pageShell({ title: pageTitle, description, canonical: `${SITE_URL}/privacy-policy`, bodyClass: '', children: body });
 }
 
 export function renderAboutPage() {
@@ -759,7 +767,7 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'About Us' })}
     <p>Find your town and the type of issue you're dealing with, fill in a short assessment request with a few photos if you have them, and our coordination team routes your enquiry to a specialist from our network who covers that trade and that area. We publish a performance SLA on every page — initial assessment review under 2 hours, on-site inspection within 48 hours — because we think you should know what to expect before you submit anything.</p>
 
     <h2>Who operates Groundlayer</h2>
-    <p>Groundlayer (groundlayer.co.uk) is operated by EIGHTFINITY LTD, a UK company. We are a specialist directory and lead-coordination service: we connect property owners with independent structural and building specialists, we are not ourselves a contractor, engineering firm, or insurer, and we don't perform any of the on-site work described on this site. Full detail on how we handle your information is in our <a href="/privacy-policy">Privacy Policy</a>, and the terms governing use of this site are in our <a href="/terms-of-service/">Terms of Service</a>.</p>
+    <p>Groundlayer (groundlayer.co.uk) is operated by <a href="https://eightfinity.net/" target="_blank" rel="noopener">EIGHTFINITY LTD</a>, a company registered in England and Wales (company no. 15528515), registered office 20 Wenlock Road, London, England, N1 7GU. We are a specialist directory and lead-coordination service: we connect property owners with independent structural and building specialists, we are not ourselves a contractor, engineering firm, or insurer, and we don't perform any of the on-site work described on this site. Full detail on how we handle your information is in our <a href="/privacy-policy">Privacy Policy</a>, and the terms governing use of this site are in our <a href="/terms-of-service/">Terms of Service</a>.</p>
 
     <h2>Get in touch</h2>
     <p>Questions about a submitted enquiry, this site, or anything else — see our <a href="/contact/">Contact page</a>, call <a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a>, or browse the <a href="/blog/">blog</a> for guides on spotting these issues before they get worse.</p>
@@ -767,7 +775,7 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'About Us' })}
 </main>
 ${siteFooter()}`;
 
-  return pageShell({ title: pageTitle, description, headExtra, children: body });
+  return pageShell({ title: pageTitle, description, canonical: `${SITE_URL}/about/`, headExtra, children: body });
 }
 
 export function renderContactPage() {
@@ -792,7 +800,7 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Contact' })}
 </main>
 ${siteFooter()}`;
 
-  return pageShell({ title: pageTitle, description, headExtra, children: body });
+  return pageShell({ title: pageTitle, description, canonical: `${SITE_URL}/contact/`, headExtra, children: body });
 }
 
 export function renderTermsPage() {
@@ -803,7 +811,7 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Terms of Serv
 <main class="wrap">
   <div class="card policy-body">
     <h2>What Groundlayer is</h2>
-    <p>${SITE_NAME} (groundlayer.co.uk) is a specialist directory and lead-coordination service operated by EIGHTFINITY LTD, a UK company. We connect property owners with independent, third-party specialists in subsidence repair, commercial roofing, tree surgery, and basement waterproofing. We are not a contractor, engineering firm, or insurer, and we do not ourselves carry out any inspection, survey, or building work.</p>
+    <p>${SITE_NAME} (groundlayer.co.uk) is a specialist directory and lead-coordination service operated by <a href="https://eightfinity.net/" target="_blank" rel="noopener">EIGHTFINITY LTD</a>, a company registered in England and Wales (company no. 15528515), registered office 20 Wenlock Road, London, England, N1 7GU. We connect property owners with independent, third-party specialists in subsidence repair, commercial roofing, tree surgery, and basement waterproofing. We are not a contractor, engineering firm, or insurer, and we do not ourselves carry out any inspection, survey, or building work.</p>
 
     <h2>No guarantee of work, pricing, or outcome</h2>
     <p>Submitting an assessment request connects you with an independent specialist from our network; it does not create a contract between you and Groundlayer or EIGHTFINITY LTD, and we don't guarantee that a specialist will be available, that any quote will be accepted, or the quality, pricing, or outcome of work carried out by a specialist. Any agreement for inspection or building work is between you and the specialist directly.</p>
@@ -826,7 +834,7 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Terms of Serv
 </main>
 ${siteFooter()}`;
 
-  return pageShell({ title: pageTitle, description, children: body });
+  return pageShell({ title: pageTitle, description, canonical: `${SITE_URL}/terms-of-service/`, children: body });
 }
 
 const BLOG_ARTICLE_BY_SLUG = new Map(BLOG_ARTICLES.map((a) => [a.slug, a]));
@@ -870,7 +878,7 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Blog' })}
 </main>
 ${siteFooter()}`;
 
-  return pageShell({ title: pageTitle, description, headExtra, children: body });
+  return pageShell({ title: pageTitle, description, canonical: `${SITE_URL}/blog/`, headExtra, children: body });
 }
 
 export function renderBlogArticle(article) {
@@ -912,5 +920,5 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Blog' })}
 </main>
 ${siteFooter()}`;
 
-  return pageShell({ title: pageTitle, description: article.summary, headExtra, children: body });
+  return pageShell({ title: pageTitle, description: article.summary, canonical: pageUrl, headExtra, children: body });
 }
