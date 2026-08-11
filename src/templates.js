@@ -187,6 +187,17 @@ const BASE_STYLES = `
   }
 `;
 
+// Responsive image sizing: pairs with the -480w/-720w WebP variants uploaded
+// alongside every hero-*.webp (the full-size file doubles as the 940w
+// entry). "sizes" mirrors .wrap's max-width (960px minus 2x16px padding) so
+// the browser's own width calculation matches what actually renders, rather
+// than guessing and over-fetching on mobile.
+const HERO_SIZES = '(max-width: 640px) calc(100vw - 32px), 928px';
+function heroSrcset(src) {
+  const base = src.replace(/\.webp$/, '');
+  return `${base}-480w.webp 480w, ${base}-720w.webp 720w, ${src} 940w`;
+}
+
 function escapeHtml(value) {
   return String(value ?? '').replace(/[&<>"']/g, (ch) => ({
     '&': '&amp;',
@@ -581,7 +592,7 @@ export function renderLandingPage({ niche, town }) {
 ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: `${escapeHtml(niche.label)} <span class="accent">${escapeHtml(town.name)}</span>` })}
 ${renderBreadcrumb({ county: town.county, town: town.name, nicheLabel: niche.label })}
 <main class="wrap">
-  ${niche.heroImage ? `<img class="hero-image" src="${niche.heroImage.src}" alt="${escapeHtml(niche.heroImage.alt)}" width="940" height="650" loading="eager" fetchpriority="high">` : ''}
+  ${niche.heroImage ? `<img class="hero-image" src="${niche.heroImage.src}" srcset="${heroSrcset(niche.heroImage.src)}" sizes="${HERO_SIZES}" alt="${escapeHtml(niche.heroImage.alt)}" width="940" height="650" loading="eager" fetchpriority="high">` : ''}
   <div class="grid two-col">
     <section>
       <div class="card">
@@ -777,7 +788,7 @@ export function renderHubPage() {
   const body = `
 ${siteHeader({ eyebrow: SITE_NAME, title: 'Find a Local Specialist' })}
 <main class="wrap">
-  <img class="hero-image" src="/assets/site-assets/hero-hub-street.webp" alt="A row of classic British brick terraced houses. Photo by Ffion Scott / Pexels." width="940" height="650" loading="eager" fetchpriority="high">
+  <img class="hero-image" src="/assets/site-assets/hero-hub-street.webp" srcset="${heroSrcset('/assets/site-assets/hero-hub-street.webp')}" sizes="${HERO_SIZES}" alt="A row of classic British brick terraced houses. Photo by Ffion Scott / Pexels." width="940" height="650" loading="eager" fetchpriority="high">
   <a class="risk-tool-banner" href="/tools/property-risk-checker/">🔎 Free tool: check a postcode's flood, subsidence, tree, and roofing risk factors &rarr;</a>
   <input type="text" id="directory-search" class="search-box" placeholder="Search by town, county, or service…">
   ${groupsHtml}
@@ -1043,7 +1054,7 @@ export function renderAboutPage() {
   const body = `
 ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'About Us' })}
 <main class="wrap">
-  <img class="hero-image" src="/assets/site-assets/hero-about-office.webp" alt="A coordinator at a desk taking a call. Photo by Carlos Arribas / Pexels." width="940" height="650" loading="eager" fetchpriority="high">
+  <img class="hero-image" src="/assets/site-assets/hero-about-office.webp" srcset="${heroSrcset('/assets/site-assets/hero-about-office.webp')}" sizes="${HERO_SIZES}" alt="A coordinator at a desk taking a call. Photo by Carlos Arribas / Pexels." width="940" height="650" loading="eager" fetchpriority="high">
   <div class="card policy-body">
     <h2>Why Groundlayer exists</h2>
     <p>Structural problems don't wait for a convenient time. Subsidence, a failing commercial roof, a dangerous tree, or a wet basement are all urgent, and finding the right specialist quickly is harder than it should be — most property owners only need to do it once or twice in a lifetime, so they're starting from zero every time. Groundlayer exists to close that gap: a single place to describe what's wrong and get connected with a vetted specialist who actually does that specific type of work, in that specific part of the UK.</p>
@@ -1139,7 +1150,7 @@ export function renderBlogHub() {
   // same BLOG_ARTICLES list so they can't drift out of sync with each other.
   const cardsHtml = BLOG_ARTICLES.map((a) => {
     const hero = NICHES.find((n) => n.slug === a.niche)?.heroImage;
-    const img = hero ? `<img class="blog-card-image" src="${hero.src}" alt="${escapeHtml(hero.alt)}" width="940" height="650" loading="lazy">` : '';
+    const img = hero ? `<img class="blog-card-image" src="${hero.src}" srcset="${heroSrcset(hero.src)}" sizes="${HERO_SIZES}" alt="${escapeHtml(hero.alt)}" width="940" height="650" loading="lazy">` : '';
     return `
     <a class="blog-card" href="/blog/${a.slug}/">
       ${img}
@@ -1205,7 +1216,7 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Blog' })}
     <a href="/blog/">Blog</a><span class="crumb-sep">/</span><span class="breadcrumb-current">${escapeHtml(article.title)}</span>
   </nav>
   <div class="card article-body">
-    ${hero ? `<img class="hero-image" src="${hero.src}" alt="${escapeHtml(hero.alt)}" width="940" height="650" loading="eager" fetchpriority="high">` : ''}
+    ${hero ? `<img class="hero-image" src="${hero.src}" srcset="${heroSrcset(hero.src)}" sizes="${HERO_SIZES}" alt="${escapeHtml(hero.alt)}" width="940" height="650" loading="eager" fetchpriority="high">` : ''}
     <p class="article-meta">Published ${escapeHtml(article.publishedAt)}</p>
     <h1>${escapeHtml(article.title)}</h1>
     ${article.bodyHtml}
