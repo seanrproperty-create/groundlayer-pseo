@@ -616,7 +616,7 @@ ${renderBreadcrumb({ county: town.county, town: town.name, nicheLabel: niche.lab
   <div class="grid two-col">
     <section>
       <div class="card">
-        <h2>Structural Engineering &amp; Specialist Diagnostics</h2>
+        <h2>${escapeHtml(niche.label)}: What We Coordinate</h2>
         <p>Property issues involving <strong>${escapeHtml(niche.short)}</strong> across the <strong>${escapeHtml(town.name)}</strong> area need prompt, qualified attention. We coordinate independent structural specialists covering ${escapeHtml(niche.description)}.</p>
       </div>
       ${adSlot()}
