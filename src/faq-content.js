@@ -98,6 +98,94 @@ export const FAQ_BY_NICHE = {
       a: "Yes, but it needs to be designed and waterproofed to BS 8102 Grade 3 standard, which usually means a cavity drain membrane system with active drainage (a sump and pump) rather than simply sealing or tanking the walls. Building Regulations also apply to habitable basement conversions, covering areas like ceiling height, fire escape, ventilation, and damp-proofing, so this is a project that needs proper design input, not just a waterproofing product applied to the walls.",
     },
   ],
+  'japanese-knotweed-removal': [
+    {
+      q: 'Do I have to declare Japanese knotweed when selling my house?',
+      a: "Yes. The TA6 Property Information Form used in UK conveyancing asks directly whether the property is affected by Japanese knotweed, and you must answer yes, no, or don't know. Failing to disclose it honestly can lead to disputes or legal claims from the buyer after completion, so this isn't something worth guessing on.",
+    },
+    {
+      q: 'Will Japanese knotweed stop me getting a mortgage?',
+      a: "It depends on severity, not just presence. RICS uses a Management Category system: Category A (knotweed already causing damage to structures) usually means automatic rejection until a treatment plan is in place; Category B (present but not causing structural damage) typically just needs a funded Management Plan; Category C (on adjoining land within 7 metres of the boundary) is the mildest case. Most lenders will proceed once a PCA-accredited specialist has provided a Knotweed Management Plan with an insurance-backed guarantee, though each lender sets its own criteria.",
+    },
+    {
+      q: 'Is it illegal to have Japanese knotweed in my garden?',
+      a: "No — simply having it on your land isn't a criminal offence and it doesn't have to be reported. What's illegal, under Schedule 9 of the Wildlife and Countryside Act 1981, is planting it or causing it to spread into the wild or onto neighbouring land. Section 14 offences can carry unlimited fines and, in serious cases, imprisonment, so the legal risk is really about allowing it to spread unmanaged, not about ownership itself.",
+    },
+    {
+      q: 'How is Japanese knotweed actually treated?',
+      a: 'The two main approaches are herbicide treatment (a programme of applications over several growing seasons, carried out by a PCA-accredited firm who provide a Knotweed Management Plan and an insurance-backed guarantee, often valid for up to 10 years) or physical excavation, which is faster but more disruptive and requires the dug-out material to be disposed of correctly as controlled waste. Which is right depends on the size of the infestation, timescale, and whether a sale or mortgage is pending.',
+    },
+    {
+      q: "What's the difference between Category A, B, and C knotweed risk?",
+      a: "This is the RICS framework mortgage lenders use to assess a property. Category A means the knotweed is close enough to cause structural damage — this is the category that usually triggers an automatic mortgage rejection until a treatment plan is agreed. Category B is present on the property but not causing structural damage, and Category C is on land adjoining the property, within 7 metres of the boundary. All three still warrant a professional survey, but the lending risk and urgency differ significantly between them.",
+    },
+  ],
+  'structural-building-surveys': [
+    {
+      q: "What's the difference between a Level 2 and Level 3 survey?",
+      a: "A Level 2 survey (HomeBuyer Report) is a visual inspection of accessible parts of the property, suited to modern homes in reasonable condition — it includes the surveyor's opinion on repairs, flags urgent issues, and can include a market valuation. A Level 3 survey (Building Survey) is a much more detailed structural inspection that involves lifting carpets and opening roof spaces where accessible, with full commentary on construction methods and defects — it's the right choice for older, unusual, or listed properties where a Level 2's visual-only inspection wouldn't catch enough.",
+    },
+    {
+      q: "Do I need a survey if I'm already getting a mortgage valuation?",
+      a: "Yes — a mortgage valuation only confirms to the lender that the property is worth what they're lending against; it isn't a survey and doesn't assess the building's condition in any real depth. A separate Level 2 or Level 3 survey, commissioned by the buyer, is the only way to actually understand what state the property is in before committing to buy it.",
+    },
+    {
+      q: 'How much does a house survey cost in the UK?',
+      a: 'As a general guide: a Level 1 Condition Report typically runs £300-£500, a Level 2 HomeBuyer Report £400-£900, and a Level 3 Building Survey £700-£1,500 or more, with London prices often 30-50% higher. The exact cost depends on the size, age, and value of the property, so these figures are a starting point rather than a quote.',
+    },
+    {
+      q: 'Which survey level do I need for an older or period property?',
+      a: "A Level 3 Building Survey is generally recommended for period properties, listed buildings, homes of non-standard construction, or anything older than roughly 50 years. These properties are far more likely to have hidden structural issues — historic movement, past repairs, non-standard materials — that only the more invasive Level 3 inspection is designed to uncover.",
+    },
+    {
+      q: 'What happens if the survey finds a problem?',
+      a: "The report will flag issues with a severity rating and the surveyor's professional opinion on what's urgent versus cosmetic. Significant structural findings are usually the point where it makes sense to bring in a specialist — a structural engineer for cracking, a damp specialist for damp, and so on — for a targeted assessment before deciding whether to proceed, renegotiate the price, or ask the seller to address it first.",
+    },
+  ],
+  'damp-proofing': [
+    {
+      q: 'What\'s the difference between rising damp, penetrating damp, and condensation?',
+      a: "Rising damp is groundwater moving up through masonry by capillary action where the damp-proof course has failed or is missing, and usually appears as a tide-mark up to around a metre on ground-floor walls. Penetrating damp comes from an external source — a defective gutter, cracked render, a bridged cavity — and can appear at any height. Condensation comes from everyday moisture (cooking, showering, drying laundry) condensing on cold surfaces, and is very commonly mistaken for rising damp. Getting the diagnosis right matters, because the fix for each is completely different.",
+    },
+    {
+      q: 'What is BS 6576 and why does it matter?',
+      a: "BS 6576 is the British Standard covering how rising damp should be diagnosed and how chemical damp-proof courses should be installed. It exists largely because rising damp is one of the most over-diagnosed problems in UK homes — condensation and penetrating damp get blamed on it far more often than genuine rising damp actually occurs — so a contractor following BS 6576 is one who's done the diagnosis properly before recommending (or not recommending) treatment.",
+    },
+    {
+      q: 'How is a chemical damp-proof course installed?',
+      a: 'A chemical DPC involves drilling a controlled pattern of holes along the affected wall and injecting a liquid formulation that penetrates the masonry and reacts with it to form a continuous water-resistant barrier — effectively replacing a physical damp-proof course that has failed or was never installed.',
+    },
+    {
+      q: 'Is rising damp always the real cause of a damp problem?',
+      a: "No, and this is worth checking carefully before paying for treatment. Genuine rising damp is less common than the staining and skirting-board damage often blamed on it — penetrating damp and condensation account for a large share of the damp problems surveyors are actually called out to. BS 6576 exists specifically so rising damp gets properly diagnosed rather than assumed, since treating condensation with a chemical injection won't fix anything.",
+    },
+    {
+      q: 'How much does damp proofing cost?',
+      a: "It depends entirely on which type of damp is actually present and how much wall length and re-plastering is involved — a straightforward chemical DPC injection on one wall is a very different job to a full external drainage fix for persistent penetrating damp. An accurate figure needs a proper diagnosis first, which is why a general estimate without a site visit isn't very meaningful.",
+    },
+  ],
+  'party-wall-surveyors': [
+    {
+      q: 'What counts as a party wall?',
+      a: 'A party wall is a wall (or in some cases a garden boundary wall) that sits on the boundary between two properties and is shared by both. The Party Wall etc. Act 1996 also covers excavation near a neighbouring building\'s foundations even where there\'s no shared wall at all, if the new foundations are within 3-6 metres depending on their depth.',
+    },
+    {
+      q: 'When do I need to serve a party wall notice?',
+      a: "You need to serve written notice on affected neighbours between two months and one year before starting work covered by the Act — building on or at the boundary, work directly to a shared wall, or nearby excavation. A notice lapses if the work hasn't started within 12 months of being served, so serving too early just means doing it again later.",
+    },
+    {
+      q: "What happens if my neighbour doesn't respond to a party wall notice?",
+      a: "If there's no response within 14 days, it's treated as a dispute under the Act and surveyors have to be appointed to resolve it — either one surveyor agreed by both sides, or one surveyor for each side who then agree a third if needed. This still results in a formal Party Wall Award, it just takes longer and costs more than a straightforward written consent would have.",
+    },
+    {
+      q: 'How much does a party wall surveyor cost?',
+      a: 'With a single surveyor agreed by both parties, typical costs run from around £900 to £2,700 for a straightforward matter. Where each side appoints their own surveyor, hourly rates of roughly £150-£300 are more common, with total costs often landing between £1,000 and £3,000. Under the Act, the building owner carrying out the work is responsible for all reasonable surveyor fees, including the neighbour\'s surveyor if they choose to appoint one separately.',
+    },
+    {
+      q: 'Do I still need a party wall agreement if my neighbour has no objection?',
+      a: "Yes. A verbal \"no objection\" isn't enough under the Act — the neighbour needs to give written consent to the notice, or a formal Party Wall Award needs to be agreed between surveyors. Skipping this step leaves the building owner without the legal protections the Act provides if a dispute arises later, for example over damage caused during the work.",
+    },
+  ],
 };
 
 export function getFaqForNiche(nicheSlug) {

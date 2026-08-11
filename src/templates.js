@@ -1,7 +1,7 @@
 import { HUB_SEARCH_SCRIPT } from './search.js';
 import { BLOG_ARTICLES } from './blog-content.js';
 import { getFaqForNiche } from './faq-content.js';
-import { FLOOD_AREA_COUNT_BY_TOWN_SLUG, FLOOD_DATA_SOURCE_NOTE, HIGHER_CLAY_RISK_COUNTIES, COASTAL_TOWN_SLUGS } from './town-facts.js';
+import { FLOOD_AREA_COUNT_BY_TOWN_SLUG, FLOOD_DATA_SOURCE_NOTE, HIGHER_CLAY_RISK_COUNTIES, COASTAL_TOWN_SLUGS, HIGHER_KNOTWEED_RISK_COUNTIES, KNOTWEED_DATA_SOURCE_NOTE } from './town-facts.js';
 import {
   PHONE_DISPLAY,
   PHONE_TEL,
@@ -511,6 +511,18 @@ function renderLocalContextSection(niche, town) {
       </div>`;
   }
 
+  if (niche.slug === 'japanese-knotweed-removal') {
+    const higherRisk = HIGHER_KNOTWEED_RISK_COUNTIES.has(town.county);
+    const body = higherRisk
+      ? `${escapeHtml(town.county)} is named among the UK's higher-incidence Japanese knotweed regions in Environet UK's published hotspot rankings, based on verified sightings logged across the country. That's a regional pattern, not a claim about any specific address — the only way to confirm whether a property is affected is a site inspection — but it's a relevant factor to be aware of when buying or maintaining a property in this area.`
+      : `${escapeHtml(town.county)} isn't among the UK's higher-incidence Japanese knotweed regions in Environet UK's published hotspot rankings, which concentrate mainly around Bristol, Merseyside, Greater London, Greater Manchester, and Lancashire. That doesn't rule out an isolated infestation locally — knotweed spreads via root fragments and can turn up almost anywhere — so a site inspection is still the only way to confirm either way for a specific property.`;
+    return `
+      <div class="card">
+        <h2>Japanese knotweed prevalence in ${escapeHtml(town.county)}</h2>
+        <p>${body} <span class="risk-source">${KNOTWEED_DATA_SOURCE_NOTE}</span></p>
+      </div>`;
+  }
+
   if (niche.slug === 'commercial-roofing' && COASTAL_TOWN_SLUGS.has(town.slug)) {
     return `
       <div class="card">
@@ -826,7 +838,7 @@ ${siteFooter()}
 
   return pageShell({
     title: `${SITE_NAME} — UK Structural Specialist Network`,
-    description: `Find vetted structural specialists for subsidence repair, commercial roofing, tree surgery, and basement waterproofing across ${TOWNS.length} UK towns.`,
+    description: `Find vetted structural, damp, and building specialists — subsidence repair, waterproofing, knotweed removal, surveys, and more — across ${TOWNS.length} UK towns.`,
     canonical: `${SITE_URL}/`,
     headExtra,
     children: body,
@@ -1068,7 +1080,7 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'About Us' })}
     <p>Structural problems don't wait for a convenient time. Subsidence, a failing commercial roof, a dangerous tree, or a wet basement are all urgent, and finding the right specialist quickly is harder than it should be — most property owners only need to do it once or twice in a lifetime, so they're starting from zero every time. Groundlayer exists to close that gap: a single place to describe what's wrong and get connected with a vetted specialist who actually does that specific type of work, in that specific part of the UK.</p>
 
     <h2>What we cover</h2>
-    <p>We focus on four specialist categories where getting the wrong contractor is expensive and hard to undo: subsidence repair (diagnostics, underpinning coordination, and resin injection remediation), commercial roofing (flat and pitched surveys, repairs, and recover/replacement), tree surgery (crown reduction, dangerous tree removal, and root-related subsidence risk assessment), and basement waterproofing (cavity drain membrane systems and tanking). Each of these is a field with its own qualifications, insurance requirements, and failure modes — a generalist "handyman" directory doesn't sort for any of that, and we think it should.</p>
+    <p>We focus on specialist categories where getting the wrong contractor is expensive and hard to undo: subsidence repair (diagnostics, underpinning coordination, and resin injection remediation), commercial roofing (flat and pitched surveys, repairs, and recover/replacement), tree surgery (crown reduction, dangerous tree removal, and root-related subsidence risk assessment), basement waterproofing (cavity drain membrane systems and tanking), Japanese knotweed removal (PCA-accredited treatment plans and insurance-backed guarantees), structural and building surveys (RICS Level 2 and Level 3), damp proofing (rising, penetrating, and condensation damp diagnosis and treatment), and party wall surveying (Party Wall etc. Act 1996 notices and awards). Each of these is a field with its own qualifications, insurance requirements, and failure modes — a generalist "handyman" directory doesn't sort for any of that, and we think it should.</p>
 
     <h2>How it works</h2>
     <p>Find your town and the type of issue you're dealing with, fill in a short assessment request with a few photos if you have them, and our coordination team passes your enquiry on to a specialist from our network who covers that trade and that area. There's no live phone desk behind the site — if you'd rather not wait for a callback, leaving a message on the phone line reaches the same coordination team.</p>
@@ -1118,7 +1130,7 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Terms of Serv
 <main class="wrap">
   <div class="card policy-body">
     <h2>What Groundlayer is</h2>
-    <p>${SITE_NAME} (groundlayer.co.uk) is a specialist network and lead-coordination service operated by <a href="https://eightfinity.net/" target="_blank" rel="noopener">EIGHTFINITY LTD</a>, a company registered in England and Wales (company no. 15528515), registered office 20 Wenlock Road, London, England, N1 7GU. We connect property owners with independent, third-party specialists in subsidence repair, commercial roofing, tree surgery, and basement waterproofing. We are not a contractor, engineering firm, or insurer, and we do not ourselves carry out any inspection, survey, or building work.</p>
+    <p>${SITE_NAME} (groundlayer.co.uk) is a specialist network and lead-coordination service operated by <a href="https://eightfinity.net/" target="_blank" rel="noopener">EIGHTFINITY LTD</a>, a company registered in England and Wales (company no. 15528515), registered office 20 Wenlock Road, London, England, N1 7GU. We connect property owners with independent, third-party specialists in subsidence repair, commercial roofing, tree surgery, basement waterproofing, Japanese knotweed removal, structural and building surveys, damp proofing, and party wall surveying. We are not a contractor, engineering firm, or insurer, and we do not ourselves carry out any inspection, survey, or building work.</p>
 
     <h2>No guarantee of work, pricing, or outcome</h2>
     <p>Submitting an assessment request connects you with an independent specialist from our network; it does not create a contract between you and Groundlayer or EIGHTFINITY LTD, and we don't guarantee that a specialist will be available, that any quote will be accepted, or the quality, pricing, or outcome of work carried out by a specialist. Any agreement for inspection or building work is between you and the specialist directly.</p>
@@ -1179,7 +1191,16 @@ export function renderBlogHub() {
       datePublished: a.publishedAt,
     })),
   };
-  const headExtra = `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog/` },
+    ],
+  };
+  const headExtra = `<script type="application/ld+json">${JSON.stringify(schema)}</script>
+<script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>`;
 
   const body = `
 ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Blog' })}
@@ -1210,8 +1231,9 @@ export function renderBlogArticle(article) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Blog', item: `${SITE_URL}/blog/` },
-      { '@type': 'ListItem', position: 2, name: article.title, item: pageUrl },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog/` },
+      { '@type': 'ListItem', position: 3, name: article.title, item: pageUrl },
     ],
   };
   const headExtra = `<script type="application/ld+json">${JSON.stringify(postSchema)}</script>

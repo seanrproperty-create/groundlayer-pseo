@@ -113,6 +113,27 @@ export const HIGHER_CLAY_RISK_COUNTIES = new Set([
 // design standards (BS EN 1991-1-4 sets higher basic wind speeds for
 // coastal/exposed sites), not a claim about any specific roof's exposure
 // category, which depends on exact site conditions an engineer would assess.
+// Counties named in Environet UK's published 2026 "Exposed" Japanese
+// knotweed heatmap hotspot rankings (top 10 UK regions by verified
+// incidences per square mile, sourced from 100,000+ logged sightings).
+// There is no free public API for this data (it's Environet's own
+// commercial heatmap tool), so this is the same kind of published,
+// citable regional finding as the BGS clay-risk data above — not a live
+// feed, not a per-address claim. Only the counties from that ranking that
+// actually match a county in TOWNS are included here; Isle of Man, Channel
+// Islands, and Isle of Wight (also top-10) have no matching town in this
+// site and are deliberately omitted rather than mapped to something close.
+export const HIGHER_KNOTWEED_RISK_COUNTIES = new Set([
+  'Bristol',
+  'Merseyside',
+  'Greater London',
+  'Greater Manchester',
+  'Lancashire',
+  'Derbyshire',
+  'South Yorkshire',
+]);
+export const KNOTWEED_DATA_SOURCE_NOTE = "Source: Environet UK, Exposed Japanese Knotweed Heatmap, 2026 hotspot rankings.";
+
 export const COASTAL_TOWN_SLUGS = new Set([
   'blackpool',
   'bournemouth',

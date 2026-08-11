@@ -34,7 +34,11 @@ export const SITE_NAME = 'Groundlayer';
 export const BUSINESS_TYPE = 'StructuralEngineeringService';
 export const SITE_URL = 'https://groundlayer.co.uk';
 
-// Four high-ticket verticals x 50 towns = 200 landing pages.
+// High-ticket structural/property verticals x 50 towns = landing pages.
+// Started at 4 (200 pages); knotweed removal, structural/building surveys,
+// damp proofing, and party wall surveying added 2026-08-11 (450 pages) --
+// underpinning was deliberately NOT added as its own niche, see the comment
+// on the NICHES array below.
 // heroImage: real, license-compliant photos sourced from Pexels
 // (2026-08-11) via the API key already in use on propertyalert.uk's
 // server for YouTube Short backgrounds (Brief 707) — reused rather than
@@ -88,6 +92,55 @@ export const NICHES = [
     heroImage: {
       src: '/assets/site-assets/hero-basement-waterproofing.webp',
       alt: 'A below-ground concrete plant room corridor. Photo by Jakub Zerdzicki / Pexels.',
+    },
+  },
+  // Underpinning was deliberately NOT added as its own niche (2026-08-11,
+  // Sean's call) — it's the same customers searching the same terms as
+  // subsidence-repair, and a separate page would cannibalize that page's
+  // rankings rather than add net-new traffic. It stays folded into
+  // subsidence-repair's description/FAQ instead.
+  {
+    slug: 'japanese-knotweed-removal',
+    label: 'Japanese Knotweed Removal',
+    short: 'Japanese knotweed removal',
+    description:
+      'PCA-accredited survey, herbicide treatment plans, and insurance-backed guarantees for Japanese knotweed affecting residential and commercial property',
+    heroImage: {
+      src: '/assets/site-assets/hero-japanese-knotweed-removal.webp',
+      alt: 'A gardener in protective gear treating plants with a sprayer. Photo by Gustavo Fring / Pexels.',
+    },
+  },
+  {
+    slug: 'structural-building-surveys',
+    label: 'Structural & Building Surveys',
+    short: 'building surveys',
+    description:
+      'RICS Level 2 HomeBuyer Reports and Level 3 Building Surveys for pre-purchase, older, and non-standard properties',
+    heroImage: {
+      src: '/assets/site-assets/hero-structural-building-surveys.webp',
+      alt: 'An inspector in a hard hat conducting a property inspection outdoors with a clipboard. Photo by RDNE Stock project / Pexels.',
+    },
+  },
+  {
+    slug: 'damp-proofing',
+    label: 'Damp Proofing',
+    short: 'damp proofing',
+    description:
+      'diagnosis and treatment of rising, penetrating, and condensation-related damp, including BS 6576 chemical damp-proof course installation',
+    heroImage: {
+      src: '/assets/site-assets/hero-damp-proofing.webp',
+      alt: 'A tradesperson drilling into an interior wall during renovation work. Photo by Adventure Studio / Pexels.',
+    },
+  },
+  {
+    slug: 'party-wall-surveyors',
+    label: 'Party Wall Surveyors',
+    short: 'party wall surveying',
+    description:
+      'Party Wall etc. Act 1996 notices, awards, and dispute resolution for building work affecting shared or boundary walls',
+    heroImage: {
+      src: '/assets/site-assets/hero-party-wall-surveyors.webp',
+      alt: 'Traditional terraced houses along a quiet UK street. Photo by Daniel Sikpi / Pexels.',
     },
   },
 ];

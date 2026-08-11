@@ -67,7 +67,7 @@ export const BLOG_ARTICLES = [
 
 <hr>
 <p><strong>About the Author</strong><br>
-Written by the Groundlayer Coordination Team at <strong>EIGHTFINITY LTD</strong>. We connect UK property owners with vetted, independent structural and building specialists across subsidence repair, commercial roofing, tree surgery, and basement waterproofing. Registered in the United Kingdom. Need support? Reach us directly at info@eightfinity.net.</p>`,
+Written by the Groundlayer Coordination Team at <strong>EIGHTFINITY LTD</strong>. We connect UK property owners with vetted, independent structural and building specialists across subsidence repair, waterproofing, roofing, surveys, and more. Registered in the United Kingdom. Need support? Reach us directly at info@eightfinity.net.</p>`,
   },
   {
     slug: 'flat-vs-pitched-commercial-roofing-uk',
@@ -128,7 +128,7 @@ Written by the Groundlayer Coordination Team at <strong>EIGHTFINITY LTD</strong>
 
 <hr>
 <p><strong>About the Author</strong><br>
-Written by the Groundlayer Coordination Team at <strong>EIGHTFINITY LTD</strong>. We connect UK property owners with vetted, independent structural and building specialists across subsidence repair, commercial roofing, tree surgery, and basement waterproofing. Registered in the United Kingdom. Need support? Reach us directly at info@eightfinity.net.</p>`,
+Written by the Groundlayer Coordination Team at <strong>EIGHTFINITY LTD</strong>. We connect UK property owners with vetted, independent structural and building specialists across subsidence repair, waterproofing, roofing, surveys, and more. Registered in the United Kingdom. Need support? Reach us directly at info@eightfinity.net.</p>`,
   },
   {
     slug: 'dangerous-tree-removal-root-subsidence-risk',
@@ -182,7 +182,7 @@ Written by the Groundlayer Coordination Team at <strong>EIGHTFINITY LTD</strong>
 
 <hr>
 <p><strong>About the Author</strong><br>
-Written by the Groundlayer Coordination Team at <strong>EIGHTFINITY LTD</strong>. We connect UK property owners with vetted, independent structural and building specialists across subsidence repair, commercial roofing, tree surgery, and basement waterproofing. Registered in the United Kingdom. Need support? Reach us directly at info@eightfinity.net.</p>`,
+Written by the Groundlayer Coordination Team at <strong>EIGHTFINITY LTD</strong>. We connect UK property owners with vetted, independent structural and building specialists across subsidence repair, waterproofing, roofing, surveys, and more. Registered in the United Kingdom. Need support? Reach us directly at info@eightfinity.net.</p>`,
   },
   {
     slug: 'basement-waterproofing-tanking-vs-cavity-drainage',
@@ -234,6 +234,6 @@ Written by the Groundlayer Coordination Team at <strong>EIGHTFINITY LTD</strong>
 
 <hr>
 <p><strong>About the Author</strong><br>
-Written by the Groundlayer Coordination Team at <strong>EIGHTFINITY LTD</strong>. We connect UK property owners with vetted, independent structural and building specialists across subsidence repair, commercial roofing, tree surgery, and basement waterproofing. Registered in the United Kingdom. Need support? Reach us directly at info@eightfinity.net.</p>`,
+Written by the Groundlayer Coordination Team at <strong>EIGHTFINITY LTD</strong>. We connect UK property owners with vetted, independent structural and building specialists across subsidence repair, waterproofing, roofing, surveys, and more. Registered in the United Kingdom. Need support? Reach us directly at info@eightfinity.net.</p>`,
   },
 ];
