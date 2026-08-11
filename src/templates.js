@@ -13,6 +13,7 @@ import {
   BUSINESS_TYPE,
   NICHES,
   TOWNS,
+  NEAREST_TOWNS_BY_SLUG,
 } from './constants.js';
 
 // No Tailwind CDN script (the pasted plan used <script src="https://tailwindcss.com">,
@@ -502,6 +503,32 @@ function renderLocalContextSection(niche, town) {
   return '';
 }
 
+// Internal cross-linking between related interior pages — see
+// NEAREST_TOWNS_BY_SLUG in constants.js. Before this, every one of the 200
+// niche x town pages only linked back up to the flat hub, so the site had no
+// internal link graph connecting related pages. Reuses the .niche-links chip
+// style already defined for the hub page rather than adding new CSS.
+function renderRelatedLinksSection(niche, town) {
+  const otherNiches = NICHES.filter((n) => n.slug !== niche.slug);
+  const nearbyTowns = NEAREST_TOWNS_BY_SLUG.get(town.slug) || [];
+
+  const otherNicheLinks = otherNiches
+    .map((n) => `<a href="/${n.slug}-${town.slug}/">${escapeHtml(n.label)}</a>`)
+    .join('');
+  const nearbyTownLinks = nearbyTowns
+    .map((t) => `<a href="/${niche.slug}-${t.slug}/">${escapeHtml(t.name)}</a>`)
+    .join('');
+
+  return `
+      <div class="card">
+        <h2>Related pages</h2>
+        <p>Other services we cover in ${escapeHtml(town.name)}:</p>
+        <div class="niche-links">${otherNicheLinks}</div>
+        <p>${escapeHtml(niche.label)} in nearby towns:</p>
+        <div class="niche-links">${nearbyTownLinks}</div>
+      </div>`;
+}
+
 export function renderLandingPage({ niche, town }) {
   const pageTitle = `${niche.label} in ${town.name} | ${SITE_NAME} Structural`;
   const description = `Get expert, high-ticket ${niche.short} services in ${town.name}. Rapid on-site engineering assessments, specialist contractors, and transparent quotes.`;
@@ -568,6 +595,7 @@ ${renderBreadcrumb({ county: town.county, town: town.name, nicheLabel: niche.lab
       </div>
       ${renderLocalContextSection(niche, town)}
       ${renderFaqSection(niche.slug)}
+      ${renderRelatedLinksSection(niche, town)}
     </section>
     <aside class="sticky-aside">
       <div class="card">

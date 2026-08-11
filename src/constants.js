@@ -155,6 +155,34 @@ for (const niche of NICHES) {
   }
 }
 
+// Great-circle distance in km — used only to rank towns by proximity for
+// internal cross-linking (below), not for anything precision-sensitive.
+function haversineKm(a, b) {
+  const R = 6371;
+  const dLat = ((b.lat - a.lat) * Math.PI) / 180;
+  const dLon = ((b.lon - a.lon) * Math.PI) / 180;
+  const lat1 = (a.lat * Math.PI) / 180;
+  const lat2 = (b.lat * Math.PI) / 180;
+  const h =
+    Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+// Built once at module load: for every town, its 5 nearest other towns.
+// Used to cross-link landing pages ("<niche> in nearby towns") so the site's
+// 200 pages form a real link graph instead of each page only linking back to
+// the flat hub — GSC showed real impressions but positions in the 70s-90s
+// for a brand-new domain with no internal linking signal (2026-08-11).
+export const NEAREST_TOWNS_BY_SLUG = new Map();
+for (const town of TOWNS) {
+  const ranked = TOWNS.filter((t) => t.slug !== town.slug)
+    .map((t) => ({ town: t, km: haversineKm(town, t) }))
+    .sort((a, b) => a.km - b.km)
+    .slice(0, 5)
+    .map((r) => r.town);
+  NEAREST_TOWNS_BY_SLUG.set(town.slug, ranked);
+}
+
 export const COOKIE_NAME = 'gl_dash_session';
 export const LOGIN_TOKEN_TTL_SECONDS = 15 * 60; // 15 minutes
 export const SESSION_TTL_SECONDS = 60 * 60 * 12; // 12 hours
