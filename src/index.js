@@ -1,6 +1,7 @@
-import { renderLandingPage, renderHubPage, renderDashboard, renderLoginPage, renderThankYouPage, renderSitemap, renderRobotsTxt, renderAdsTxt, renderLlmsTxt, renderPrivacyPolicy, renderAboutPage, renderContactPage, renderTermsPage, renderBlogHub, renderBlogArticle, getBlogArticleBySlug } from './templates.js';
+import { renderLandingPage, renderHubPage, renderDashboard, renderLoginPage, renderThankYouPage, renderSitemap, renderRobotsTxt, renderAdsTxt, renderLlmsTxt, renderPrivacyPolicy, renderAboutPage, renderContactPage, renderTermsPage, renderBlogHub, renderBlogArticle, getBlogArticleBySlug, renderPropertyRiskChecker } from './templates.js';
 import { sendLeadEmail, sendCustomerConfirmationEmail, sendLoginLinkEmail } from './email.js';
 import { checkAccess, requestLoginLink, verifyLoginToken, buildSessionCookie } from './access.js';
+import { checkPropertyRisk } from './risk-data.js';
 import { PAGE_MAP } from './constants.js';
 import {
   FAVICON_ICO_BASE64,
@@ -63,11 +64,19 @@ export default {
     if (path.startsWith('/local/uploads/') && method === 'GET') {
       return handleServeUpload(request, env, path);
     }
+    if (path.startsWith('/assets/') && method === 'GET') {
+      return handleServeAsset(env, path);
+    }
     if (path === '/local/submit-lead' && method === 'POST') {
       return handleSubmitLead(request, env, ctx, url);
     }
     if (path === '/local/thank-you' && method === 'GET') {
       return html(renderThankYouPage());
+    }
+    if (path === '/tools/property-risk-checker/' && method === 'GET') {
+      const postcodeParam = url.searchParams.get('postcode');
+      const result = postcodeParam ? await checkPropertyRisk(postcodeParam) : undefined;
+      return html(renderPropertyRiskChecker({ result }));
     }
     if ((path === '/' || path === '/local' || path === '/local/') && method === 'GET') {
       return html(renderHubPage());
@@ -273,6 +282,25 @@ async function handleServeUpload(request, env, path) {
   const headers = new Headers();
   object.writeHttpMetadata(headers);
   headers.set('Cache-Control', 'private, max-age=3600');
+  return new Response(object.body, { headers });
+}
+
+// Public, unauthenticated — site-owned marketing images only (hero photos
+// etc.), never lead photos. Restricted to the "site-assets/" R2 prefix so
+// this can't become a backdoor read path into "leads/" uploads, which stay
+// behind handleServeUpload's auth check above.
+async function handleServeAsset(env, path) {
+  const key = path.slice('/assets/'.length);
+  if (!key.startsWith('site-assets/')) {
+    return new Response('Not Found', { status: 404 });
+  }
+  const object = await env.R2_BUCKET.get(key);
+  if (!object) {
+    return new Response('Not Found', { status: 404 });
+  }
+  const headers = new Headers();
+  object.writeHttpMetadata(headers);
+  headers.set('Cache-Control', 'public, max-age=2592000');
   return new Response(object.body, { headers });
 }
 

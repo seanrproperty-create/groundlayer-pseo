@@ -29,6 +29,16 @@ export const BUSINESS_TYPE = 'StructuralEngineeringService';
 export const SITE_URL = 'https://groundlayer.co.uk';
 
 // Four high-ticket verticals x 50 towns = 200 landing pages.
+// heroImage: real, license-compliant photos sourced from Pexels
+// (2026-08-11) via the API key already in use on propertyalert.uk's
+// server for YouTube Short backgrounds (Brief 707) — reused rather than
+// provisioning a new key. Pexels' license permits commercial use without
+// mandatory attribution, but a photographer credit is included anyway as
+// good practice. Each photo was picked to genuinely represent the service
+// (a real inspection/repair/removal in progress), not a decorative texture
+// standing in for something it isn't — the first subsidence-repair
+// candidates (cracked paint/plaster close-ups) were rejected for exactly
+// that reason. alt text also serves as the visible photo credit.
 export const NICHES = [
   {
     slug: 'subsidence-repair',
@@ -36,6 +46,10 @@ export const NICHES = [
     short: 'subsidence repair',
     description:
       'diagnostics, underpinning coordination, and resin injection remediation for subsidence, cracking, and foundation movement',
+    heroImage: {
+      src: '/assets/site-assets/hero-subsidence-repair.jpg',
+      alt: 'A structural inspector examining a property during a site assessment. Photo by RDNE Stock project / Pexels.',
+    },
   },
   {
     slug: 'commercial-roofing',
@@ -43,6 +57,10 @@ export const NICHES = [
     short: 'commercial roofing',
     description:
       'flat and pitched commercial roof surveys, repairs, and full recover/replacement contracting',
+    heroImage: {
+      src: '/assets/site-assets/hero-commercial-roofing.jpg',
+      alt: 'A roofer working from an access platform on a tiled roof. Photo by Gundula Vogel / Pexels.',
+    },
   },
   {
     slug: 'tree-surgeon',
@@ -50,6 +68,10 @@ export const NICHES = [
     short: 'tree surgery',
     description:
       'arboricultural inspection, crown reduction, dangerous tree removal, and root-related subsidence risk assessment',
+    heroImage: {
+      src: '/assets/site-assets/hero-tree-surgeon.jpg',
+      alt: 'A rigged arborist using a chainsaw to remove a section of tree. Photo by Jacky / Pexels.',
+    },
   },
   {
     slug: 'basement-waterproofing',
@@ -57,6 +79,10 @@ export const NICHES = [
     short: 'basement waterproofing',
     description:
       'cavity drain membrane systems, tanking, and structural waterproofing for basements and below-ground structures',
+    heroImage: {
+      src: '/assets/site-assets/hero-basement-waterproofing.jpg',
+      alt: 'A below-ground concrete plant room corridor. Photo by Jakub Zerdzicki / Pexels.',
+    },
   },
 ];
 
