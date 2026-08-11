@@ -211,7 +211,15 @@ function escapeHtml(value) {
 // Real logo + full favicon package (Sean's 2026-08-04 upload, run through
 // realfavicongenerator.net), served via dedicated cached routes rather than
 // inlined here — see brand-assets.js for why.
-const LOGO_HREF = '/apple-touch-icon.png';
+//
+// The visible header logo used to just reuse /apple-touch-icon.png (a
+// 180x180 PNG required at that exact size for iOS home-screen icons) at its
+// actual 36x38 display size -- PageSpeed correctly flagged that as ~16KB
+// wasted on every single page load. brand-logo.webp is a dedicated
+// 120x120 WebP resized from the same source, sized for a 38px slot at up to
+// 3x device pixel ratio. /apple-touch-icon.png itself is untouched and
+// still serves its real purpose.
+const LOGO_HREF = '/assets/site-assets/brand-logo.webp';
 
 // AdSense's own loader script is NOT included here (unlike the old
 // unconditional adsenseHead()) — it only gets injected client-side, after
