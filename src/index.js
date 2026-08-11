@@ -2,7 +2,7 @@ import { renderLandingPage, renderHubPage, renderDashboard, renderLoginPage, ren
 import { sendLeadEmail, sendCustomerConfirmationEmail, sendLoginLinkEmail } from './email.js';
 import { checkAccess, requestLoginLink, verifyLoginToken, buildSessionCookie } from './access.js';
 import { checkPropertyRisk } from './risk-data.js';
-import { PAGE_MAP } from './constants.js';
+import { PAGE_MAP, INDEXNOW_KEY } from './constants.js';
 import {
   FAVICON_ICO_BASE64,
   FAVICON_SVG_BASE64,
@@ -83,6 +83,9 @@ export default {
     }
     if (path === '/sitemap.xml' && method === 'GET') {
       return new Response(renderSitemap(), { headers: { 'Content-Type': 'application/xml;charset=UTF-8' } });
+    }
+    if (path === `/${INDEXNOW_KEY}.txt` && method === 'GET') {
+      return new Response(INDEXNOW_KEY, { headers: { 'Content-Type': 'text/plain;charset=UTF-8' } });
     }
     if (path === '/robots.txt' && method === 'GET') {
       return new Response(renderRobotsTxt(), { headers: { 'Content-Type': 'text/plain;charset=UTF-8' } });

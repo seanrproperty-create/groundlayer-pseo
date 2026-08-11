@@ -1,6 +1,12 @@
 export const PHONE_DISPLAY = '0330 220 0118';
 export const PHONE_TEL = '03302200118';
 
+// IndexNow protocol key (Bing/Yandex/Seznov/Naver): must be served verbatim
+// at /<key>.txt so the search engine can verify ping ownership before
+// accepting submitted URLs. Generated 2026-08-11, no rotation needed unless
+// compromised.
+export const INDEXNOW_KEY = '22e434a3af384c85827dd8cbe63fd73e';
+
 // Receives the per-lead notification email (src/email.js sendLeadEmail).
 // Unrelated to who can log into the dashboard — see DASHBOARD_ADMIN_EMAILS.
 export const ADMIN_EMAIL = 'info@eightfinity.net';
@@ -47,7 +53,7 @@ export const NICHES = [
     description:
       'diagnostics, underpinning coordination, and resin injection remediation for subsidence, cracking, and foundation movement',
     heroImage: {
-      src: '/assets/site-assets/hero-subsidence-repair.jpg',
+      src: '/assets/site-assets/hero-subsidence-repair.webp',
       alt: 'A structural inspector examining a property during a site assessment. Photo by RDNE Stock project / Pexels.',
     },
   },
@@ -58,7 +64,7 @@ export const NICHES = [
     description:
       'flat and pitched commercial roof surveys, repairs, and full recover/replacement contracting',
     heroImage: {
-      src: '/assets/site-assets/hero-commercial-roofing.jpg',
+      src: '/assets/site-assets/hero-commercial-roofing.webp',
       alt: 'A roofer working from an access platform on a tiled roof. Photo by Gundula Vogel / Pexels.',
     },
   },
@@ -69,7 +75,7 @@ export const NICHES = [
     description:
       'arboricultural inspection, crown reduction, dangerous tree removal, and root-related subsidence risk assessment',
     heroImage: {
-      src: '/assets/site-assets/hero-tree-surgeon.jpg',
+      src: '/assets/site-assets/hero-tree-surgeon.webp',
       alt: 'A rigged arborist using a chainsaw to remove a section of tree. Photo by Jacky / Pexels.',
     },
   },
@@ -80,7 +86,7 @@ export const NICHES = [
     description:
       'cavity drain membrane systems, tanking, and structural waterproofing for basements and below-ground structures',
     heroImage: {
-      src: '/assets/site-assets/hero-basement-waterproofing.jpg',
+      src: '/assets/site-assets/hero-basement-waterproofing.webp',
       alt: 'A below-ground concrete plant room corridor. Photo by Jakub Zerdzicki / Pexels.',
     },
   },

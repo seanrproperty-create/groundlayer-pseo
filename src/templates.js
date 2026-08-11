@@ -777,7 +777,7 @@ export function renderHubPage() {
   const body = `
 ${siteHeader({ eyebrow: SITE_NAME, title: 'Find a Local Specialist' })}
 <main class="wrap">
-  <img class="hero-image" src="/assets/site-assets/hero-hub-street.jpg" alt="A row of classic British brick terraced houses. Photo by Ffion Scott / Pexels." width="940" height="650" loading="eager" fetchpriority="high">
+  <img class="hero-image" src="/assets/site-assets/hero-hub-street.webp" alt="A row of classic British brick terraced houses. Photo by Ffion Scott / Pexels." width="940" height="650" loading="eager" fetchpriority="high">
   <a class="risk-tool-banner" href="/tools/property-risk-checker/">🔎 Free tool: check a postcode's flood, subsidence, tree, and roofing risk factors &rarr;</a>
   <input type="text" id="directory-search" class="search-box" placeholder="Search by town, county, or service…">
   ${groupsHtml}
@@ -1043,7 +1043,7 @@ export function renderAboutPage() {
   const body = `
 ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'About Us' })}
 <main class="wrap">
-  <img class="hero-image" src="/assets/site-assets/hero-about-office.jpg" alt="A coordinator at a desk taking a call. Photo by Carlos Arribas / Pexels." width="940" height="650" loading="eager" fetchpriority="high">
+  <img class="hero-image" src="/assets/site-assets/hero-about-office.webp" alt="A coordinator at a desk taking a call. Photo by Carlos Arribas / Pexels." width="940" height="650" loading="eager" fetchpriority="high">
   <div class="card policy-body">
     <h2>Why Groundlayer exists</h2>
     <p>Structural problems don't wait for a convenient time. Subsidence, a failing commercial roof, a dangerous tree, or a wet basement are all urgent, and finding the right specialist quickly is harder than it should be — most property owners only need to do it once or twice in a lifetime, so they're starting from zero every time. Groundlayer exists to close that gap: a single place to describe what's wrong and get connected with a vetted specialist who actually does that specific type of work, in that specific part of the UK.</p>
