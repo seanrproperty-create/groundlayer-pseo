@@ -42,14 +42,21 @@ const BASE_STYLES = `
   :root {
     color-scheme: light;
     --coral: #d9673f;
-    --coral-deep: #b84f2d;
+    /* coral-deep and muted darkened 2026-08-13 -- the originals (#b84f2d,
+       #8a7c68) failed WCAG AA 4.5:1 in real contexts on this page (coral-deep
+       on the .niche-links chip background: 4.21:1; muted on white cards:
+       4.07:1), caught by an external Yell.com audit reporting 463 contrast
+       violations. These pass >=5.1:1 everywhere they're actually used. */
+    --coral-deep: #a3441f;
     --sage: #7f9370;
-    --sage-deep: #647a56;
+    /* darkened alongside coral-deep/muted above -- #647a56 failed AA on
+       sand (4.30:1) and the blog pro-tip background (4.13:1). */
+    --sage-deep: #4f6144;
     --sand: #faf4ea;
     --card: #ffffff;
     --line: #ece2d0;
     --ink: #33291f;
-    --muted: #8a7c68;
+    --muted: #6b5f4d;
   }
   * { box-sizing: border-box; }
   body { margin: 0; font-family: Georgia, "Bookman Old Style", "Palatino Linotype", serif; background: var(--sand); color: var(--ink); }
@@ -61,8 +68,8 @@ const BASE_STYLES = `
   .brand-row { display: flex; align-items: center; gap: 10px; }
   .brand-logo { display: block; width: 36px; height: 38px; object-fit: contain; flex-shrink: 0; }
   .eyebrow { font-family: "Segoe UI Semibold", "Segoe UI", Verdana, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral-deep); display: block; margin-bottom: 2px; }
-  .title { font-family: "Segoe UI Semibold", "Segoe UI", Verdana, sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); }
-  .title .accent { color: var(--coral); font-style: italic; }
+  .title { display: block; margin: 0; font-family: "Segoe UI Semibold", "Segoe UI", Verdana, sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); }
+  .title .accent { color: var(--coral-deep); font-style: italic; }
   .call-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--sage); color: #fff; font-family: "Segoe UI Semibold", "Segoe UI", Verdana, sans-serif; font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 10px 10px 10px 2px; text-decoration: none; white-space: nowrap; }
   main { padding: 28px 0 48px; }
   .grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
@@ -80,7 +87,7 @@ const BASE_STYLES = `
   .field { margin-bottom: 14px; }
   .file-drop { position: relative; border: 2px dashed var(--line); border-radius: 10px 10px 10px 2px; padding: 16px; text-align: center; background: var(--sand); }
   .file-drop input[type=file] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
-  .submit-btn { width: 100%; background: var(--coral); color: #fff; font-family: "Segoe UI Semibold", "Segoe UI", Verdana, sans-serif; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; padding: 14px; border: 0; border-radius: 10px 10px 10px 2px; cursor: pointer; }
+  .submit-btn { width: 100%; background: var(--coral-deep); color: #fff; font-family: "Segoe UI Semibold", "Segoe UI", Verdana, sans-serif; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; padding: 14px; border: 0; border-radius: 10px 10px 10px 2px; cursor: pointer; }
   .consent-note { font-family: "Segoe UI", sans-serif; font-size: 11px; line-height: 1.5; color: var(--muted); margin: 0 0 10px; }
   .consent-note a { color: var(--coral-deep); text-decoration: underline; }
   .policy-body h2 { font-family: Georgia, serif; font-size: 16px; font-weight: 700; margin: 24px 0 8px; color: var(--ink); }
@@ -118,7 +125,7 @@ const BASE_STYLES = `
   .consent-banner-actions { display: flex; gap: 8px; flex-shrink: 0; }
   .consent-btn { font-family: "Segoe UI Semibold", "Segoe UI", Verdana, sans-serif; font-size: 12px; font-weight: 700; padding: 9px 16px; border-radius: 10px 10px 10px 2px; border: 0; cursor: pointer; }
   .consent-btn-secondary { background: #4a3d2e; color: #e8ded0; }
-  .consent-btn-primary { background: var(--coral); color: #fff; }
+  .consent-btn-primary { background: var(--coral-deep); color: #fff; }
   .site-footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; margin-bottom: 8px; font-family: "Segoe UI", sans-serif; font-size: 12px; }
   .site-footer nav a { color: var(--muted); text-decoration: none; font-weight: 700; }
   .site-footer nav a:hover { color: var(--coral); text-decoration: underline; }
@@ -148,7 +155,7 @@ const BASE_STYLES = `
   .risk-intro h1 { font-size: 24px; margin: 0 0 8px; color: var(--ink); }
   .risk-form { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
   .risk-form input[type=text] { flex: 1 1 220px; }
-  .risk-form .btn-primary { flex-shrink: 0; background: var(--coral); color: #fff; font-family: "Segoe UI Semibold", "Segoe UI", Verdana, sans-serif; font-weight: 700; font-size: 13px; padding: 12px 20px; border: 0; border-radius: 10px 10px 10px 2px; cursor: pointer; }
+  .risk-form .btn-primary { flex-shrink: 0; background: var(--coral-deep); color: #fff; font-family: "Segoe UI Semibold", "Segoe UI", Verdana, sans-serif; font-weight: 700; font-size: 13px; padding: 12px 20px; border: 0; border-radius: 10px 10px 10px 2px; cursor: pointer; }
   .risk-error { background: #fbe9e5; border: 2px solid #e8b8ab; color: #9c3f24; font-family: "Segoe UI", sans-serif; font-size: 13px; font-weight: 700; padding: 14px 16px; border-radius: 12px 12px 12px 2px; margin-top: 20px; }
   .risk-result { margin-top: 24px; }
   .risk-result h2 { font-family: Georgia, serif; font-size: 18px; font-weight: 700; margin: 0 0 6px; color: var(--ink); }
@@ -366,8 +373,25 @@ function bottomTabBar() {
 </nav>`;
 }
 
-function pageShell({ title, description, canonical = '', headExtra = '', bodyClass = '', children }) {
+// Default social-share image for any page that doesn't pass its own —
+// Open Graph tags were entirely absent site-wide until now (caught by the
+// same Yell.com audit as the missing H1s, 2026-08-12), so shares on
+// Facebook/LinkedIn/X/Slack etc. rendered with no preview image or text.
+const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/site-assets/hero-hub-street.webp`;
+
+function pageShell({ title, description, canonical = '', headExtra = '', bodyClass = '', children, ogImage = DEFAULT_OG_IMAGE, ogType = 'website' }) {
   const canonicalTag = canonical ? `<link rel="canonical" href="${canonical}">\n` : '';
+  const ogUrl = canonical || SITE_URL;
+  const ogTags = `<meta property="og:type" content="${ogType}">
+<meta property="og:site_name" content="${SITE_NAME}">
+<meta property="og:title" content="${escapeHtml(title)}">
+<meta property="og:description" content="${escapeHtml(description)}">
+<meta property="og:url" content="${ogUrl}">
+<meta property="og:image" content="${ogImage}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${escapeHtml(title)}">
+<meta name="twitter:description" content="${escapeHtml(description)}">
+<meta name="twitter:image" content="${ogImage}">`;
   return `<!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -376,6 +400,7 @@ ${gaHead()}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${escapeHtml(title)}</title>
 <meta name="description" content="${escapeHtml(description)}">
+${ogTags}
 ${canonicalTag}<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="shortcut icon" href="/favicon.ico">
@@ -393,7 +418,14 @@ ${bottomTabBar()}
 </html>`;
 }
 
-function siteHeader({ eyebrow, title }) {
+// asH1 defaults to true: on every page except the two that already define
+// their own more specific <h1> in the body (risk checker, blog article —
+// see their call sites below), this IS the page's only top-level heading.
+// Previously always rendered as a <span>, meaning literally no page on the
+// site had a real H1 — caught by an external Yell.com site-audit report
+// (2026-08-12), not something noticed internally.
+function siteHeader({ eyebrow, title, asH1 = true }) {
+  const titleTag = asH1 ? 'h1' : 'span';
   return `
 <header class="site-header">
   <div class="wrap row">
@@ -401,7 +433,7 @@ function siteHeader({ eyebrow, title }) {
       <a class="eyebrow-link" href="/"><img class="brand-logo" src="${LOGO_HREF}" alt="${SITE_NAME}" width="36" height="38"></a>
       <div>
         <a class="eyebrow-link" href="/"><span class="eyebrow">${escapeHtml(eyebrow)}</span></a>
-        <span class="title">${title}</span>
+        <${titleTag} class="title">${title}</${titleTag}>
       </div>
     </div>
     <a class="call-btn" href="tel:${PHONE_TEL}">📞 ${PHONE_DISPLAY}</a>
@@ -543,11 +575,15 @@ function renderRelatedLinksSection(niche, town) {
   const otherNiches = NICHES.filter((n) => n.slug !== niche.slug);
   const nearbyTowns = NEAREST_TOWNS_BY_SLUG.get(town.slug) || [];
 
+  // title attribute carries the full "<niche> in <town>" context per link
+  // (each destination is unique) without lengthening the visible chip text —
+  // an external audit flagged the repeated short label as ambiguous anchor
+  // text across many different destinations (2026-08-12).
   const otherNicheLinks = otherNiches
-    .map((n) => `<a href="/${n.slug}-${town.slug}/">${escapeHtml(n.label)}</a>`)
+    .map((n) => `<a href="/${n.slug}-${town.slug}/" title="${escapeHtml(n.label)} in ${escapeHtml(town.name)}">${escapeHtml(n.label)}</a>`)
     .join('');
   const nearbyTownLinks = nearbyTowns
-    .map((t) => `<a href="/${niche.slug}-${t.slug}/">${escapeHtml(t.name)}</a>`)
+    .map((t) => `<a href="/${niche.slug}-${t.slug}/" title="${escapeHtml(niche.label)} in ${escapeHtml(t.name)}">${escapeHtml(t.name)}</a>`)
     .join('');
 
   return `
@@ -667,7 +703,7 @@ ${renderBreadcrumb({ county: town.county, town: town.name, nicheLabel: niche.lab
 </main>
 ${siteFooter()}`;
 
-  return pageShell({ title: pageTitle, description, canonical: pageUrl, headExtra, children: body });
+  return pageShell({ title: pageTitle, description, canonical: pageUrl, headExtra, children: body, ogImage: niche.heroImage ? `${SITE_URL}${niche.heroImage.src}` : undefined });
 }
 
 export function renderThankYouPage() {
@@ -683,8 +719,26 @@ ${siteFooter()}`;
   return pageShell({ title: `Request received | ${SITE_NAME}`, description: 'Your enquiry has been received.', children: body });
 }
 
-// Property Structural Risk Checker — the linkable-asset tool tying all 4
-// niches together under one shared theme (structural property risk), see
+// Branded 404 — was a bare "Not Found" text response with no HTML, no
+// design, and no way back into the site (caught by the Yell.com audit,
+// 2026-08-12: "No custom design"). Still returned with a real 404 status.
+export function renderNotFoundPage() {
+  const body = `
+${siteHeader({ eyebrow: SITE_NAME, title: 'Page not found' })}
+<main class="wrap">
+  <div class="card">
+    <h2>We can't find that page</h2>
+    <p>The page you're looking for may have moved or the link may be out of date. Try one of these instead:</p>
+    <p><a href="/">Find a local specialist</a> &middot; <a href="/tools/property-risk-checker/">Property Risk Checker</a> &middot; <a href="/blog/">Blog</a> &middot; <a href="/contact/">Contact us</a></p>
+  </div>
+</main>
+${siteFooter()}`;
+  return pageShell({ title: `Page not found | ${SITE_NAME}`, description: 'This page could not be found.', children: body });
+}
+
+// Property Structural Risk Checker — the linkable-asset tool tying the
+// original 4 niches together under one shared theme (structural property
+// risk), see
 // [[project_groundlayer_pseo_build]] / the pseo-directory-buildout skill's
 // "Building topical authority" section. GET-only, server-rendered, so a
 // result page (?postcode=...) is itself a real, crawlable, shareable URL —
@@ -754,7 +808,7 @@ export function renderPropertyRiskChecker({ result } = {}) {
   }
 
   const body = `
-${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Property Risk Checker' })}
+${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Property Risk Checker', asH1: false })}
 <main class="wrap">
   <div class="card risk-intro">
     <h1>Property Structural Risk Checker</h1>
@@ -788,7 +842,7 @@ export function renderHubPage() {
             .join(' ')
             .toLowerCase();
           const links = NICHES.map(
-            (n) => `<a href="/${n.slug}-${town.slug}/">${escapeHtml(n.label)}</a>`
+            (n) => `<a href="/${n.slug}-${town.slug}/" title="${escapeHtml(n.label)} in ${escapeHtml(town.name)}">${escapeHtml(n.label)}</a>`
           ).join('');
           return `
           <div class="town-card" data-search-text="${escapeHtml(searchText)}">
@@ -977,7 +1031,7 @@ export function renderSitemap() {
     .map((u) => `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod || today}</lastmod><priority>${u.priority}</priority></url>`)
     .join('\n');
 
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">\n${entries}\n</urlset>\n`;
 }
 
 // Traditional search engines discover pages via the wildcard allow rule below
@@ -1240,7 +1294,7 @@ export function renderBlogArticle(article) {
 <script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>`;
 
   const body = `
-${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Blog' })}
+${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Blog', asH1: false })}
 <main class="wrap">
   <nav class="breadcrumb-inner article-breadcrumb">
     <a href="/blog/">Blog</a><span class="crumb-sep">/</span><span class="breadcrumb-current">${escapeHtml(article.title)}</span>
@@ -1254,5 +1308,5 @@ ${siteHeader({ eyebrow: `${SITE_NAME} Specialist Network`, title: 'Blog' })}
 </main>
 ${siteFooter()}`;
 
-  return pageShell({ title: pageTitle, description: article.summary, canonical: pageUrl, headExtra, children: body });
+  return pageShell({ title: pageTitle, description: article.summary, canonical: pageUrl, headExtra, children: body, ogImage: hero ? `${SITE_URL}${hero.src}` : undefined, ogType: 'article' });
 }

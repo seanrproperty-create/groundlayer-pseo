@@ -1,4 +1,4 @@
-import { renderLandingPage, renderHubPage, renderDashboard, renderLoginPage, renderThankYouPage, renderSitemap, renderRobotsTxt, renderAdsTxt, renderLlmsTxt, renderPrivacyPolicy, renderAboutPage, renderContactPage, renderTermsPage, renderBlogHub, renderBlogArticle, getBlogArticleBySlug, renderPropertyRiskChecker } from './templates.js';
+import { renderLandingPage, renderHubPage, renderDashboard, renderLoginPage, renderThankYouPage, renderSitemap, renderRobotsTxt, renderAdsTxt, renderLlmsTxt, renderPrivacyPolicy, renderAboutPage, renderContactPage, renderTermsPage, renderBlogHub, renderBlogArticle, getBlogArticleBySlug, renderPropertyRiskChecker, renderNotFoundPage } from './templates.js';
 import { sendLeadEmail, sendCustomerConfirmationEmail, sendLoginLinkEmail } from './email.js';
 import { checkAccess, requestLoginLink, verifyLoginToken, buildSessionCookie } from './access.js';
 import { checkPropertyRisk } from './risk-data.js';
@@ -136,7 +136,7 @@ export default {
       const slug = path.slice('/blog/'.length).replace(/\/$/, '');
       const article = getBlogArticleBySlug(slug);
       if (article) return html(renderBlogArticle(article));
-      return new Response('Not Found', { status: 404 });
+      return html(renderNotFoundPage(), 404);
     }
     // Flattened landing pages live directly off the root, e.g.
     // "/subsidence-repair-stoke-on-trent/" — checked last, after every
@@ -150,7 +150,7 @@ export default {
       }
     }
 
-    return new Response('Not Found', { status: 404 });
+    return html(renderNotFoundPage(), 404);
   },
 };
 
@@ -376,6 +376,6 @@ function csvCell(value) {
   return str;
 }
 
-function html(body) {
-  return new Response(body, { headers: { 'Content-Type': 'text/html;charset=UTF-8' } });
+function html(body, status = 200) {
+  return new Response(body, { status, headers: { 'Content-Type': 'text/html;charset=UTF-8' } });
 }

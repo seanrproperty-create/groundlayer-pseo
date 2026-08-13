@@ -31,7 +31,17 @@ export const GA_MEASUREMENT_ID = 'G-VW421N550V';
 export const ADSENSE_PUBLISHER_ID = 'pub-9748936508682808';
 
 export const SITE_NAME = 'Groundlayer';
-export const BUSINESS_TYPE = 'StructuralEngineeringService';
+// 'StructuralEngineeringService' (the original value here) is not a real
+// schema.org type -- it doesn't exist anywhere in schema.org's vocabulary,
+// so every page's LocalBusiness structured data was silently unrecognized
+// by anything parsing it strictly. Confirmed via schema.org itself and
+// caught by an external Yell.com audit (2026-08-12): "Structured data was
+// found on your site, but none of it identifies you as a local business."
+// HomeAndConstructionBusiness is a real schema.org type, a LocalBusiness
+// subtype, and honest -- EIGHTFINITY coordinates specialists rather than
+// contracting directly, so a specific leaf type like GeneralContractor
+// would overclaim; the parent type covers all niches without doing that.
+export const BUSINESS_TYPE = 'HomeAndConstructionBusiness';
 export const SITE_URL = 'https://groundlayer.co.uk';
 
 // High-ticket structural/property verticals x 50 towns = landing pages.
